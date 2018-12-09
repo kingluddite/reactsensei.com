@@ -48,5 +48,6 @@ module.exports = {
         path: `${ __dirname }/src/images`,
       },
     },
+    'gatsby-plugin-netlify', // make sure this is the very last plugin
   ],
 }
