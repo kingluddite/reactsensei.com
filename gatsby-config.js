@@ -3,6 +3,7 @@ module.exports = {
     title: 'React Sensei',
     description:
       'Learn Gatsby from the ground up. Our target market are people new to the world of development',
+    siteUrl: 'https://reactsensei.com',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -22,8 +23,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'React Sensei',
+        short_name: 'ReactSensei',
         start_url: '/',
         background_color: '#663399',
         theme_color: '#663399',
@@ -48,6 +49,8 @@ module.exports = {
         path: `${ __dirname }/src/images`,
       },
     },
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-netlify-cms',
     'gatsby-plugin-netlify', // make sure this is the very last plugin
   ],
 }
