@@ -44,7 +44,7 @@ title: "iTerm"
 * [Setting Documentation](https://www.iterm2.com/documentation-preferences.html)
 * Preference recommendations
   - [Sourabhbajaj](http://sourabhbajaj.com/mac-setup/iTerm/README.html)
-  - [Adam Wade Harris](http://www.adamwadeharris.com/my-iterm-2-setup/)
+  - [Adam Garrett-Harris](https://adam.garrett-harris.com/my-iterm-2-setup)
 * [Video Tutorial Installing iTerm or Cygwin](https://www.youtube.com/watch?v=jnLA6yAZkaY)
   - **note** Windows uses cygwin
   - Gives you a Terminal that is Unix based
