@@ -1,17 +1,21 @@
+---
+slug: "/git"
+date: "2019-03-16"
+title: "Git"
+---
 # GIT
 
 ## Useful GIT commands
 
 ## How to start using git
-* aka How to initialize a git repo (aka repository) locally
-* How to you get get to start "watching" your folder? 
-* When you start a project you create a folder and if you want to starting using `git` for **version control** of your project (aka "watching your folder for all changes", just use `init`
+* Use this to initialize a git repo (aka repository) locally
+* After you use this command Git can start "watching" your folder? 
 
 ```
 $ git init
 ```
 
-### Undo last commit
+### How do I undo the last commit?
 ```
 $ git reset HEAD~
 ```
@@ -75,15 +79,18 @@ $ rm -rf .git
 ```
 
 ## Forking vs Cloning a repo
-You see a repo you like. Just grab its repo url and clone it to a spot on your computer and you are off and running. But what if you like the project so much you want to work on it and make it better. This is the whole impetus behind the open source movement. That is where forking comes into play. Instead of just cloning it, you fork it and that fork takes a copy of that open source community repo and puts that exact copy (github shows an animation of a photocopy machine making a copy of a book) to your repo. If you look at the Github UI you will see they are telling you this information.
+You see a repo you like. Just grab its repo url and clone it to a spot on your computer and you are off and running. But what if you like the project so much you want to work on it and make it better. This is the whole reason behind the open source movement. That is where forking comes into play. Instead of just cloning it, you fork it and that fork takes a copy of that open source community repo and puts that exact copy (github shows an animation of a photocopy machine making a copy of a book) to your repo. If you look at the Github UI you will see they are telling you this information.
+## Forks
+* This is in contrast to just simply cloning the repo
+* When you fork someone else's repo, you get and exact copy of the repo (think xerox copy machine) but it is added inside your repo. You can take this code and totally do whatever you want with it but if you want to contribute to the open source project you can make pull requests to the other person's repo that you forked. They can accept and add your changes or deny or deny and ask for improvements before adding
+* When changes happen to this forked repo by the creators of it, you can pull down the new modifications only if you add `upstream` capability to your report. This is the direct connection to communicate from them to you and you to them.
 
 ![Github UI shows forked repo](https://i.imgur.com/fsSP24C.png)
 
-When you set up your own Github repo you traditionally refer to that as your remote `origin master`. So when you are working on your own project you will add and commit locally and then push to your remote repo (origin master). But when you fork you also have access to `upstream` repo you forked from.
+* When you set up your own Github repo you traditionally refer to that as your remote `origin master`. So when you are working on your own project you will add and commit locally and then push to your remote repo (origin master). But when you fork you also have access to `upstream` repo you forked from
+* A good tip is to check your remote connections information and this will show you where your remote origin master is and where your `upstream` is. If you don't see it, you may need to add it depending on what you are doing for your project.
 
-A good tip is to check your remote connections information and this will show you where your remote origin master is and where your `upstream` is. If you don't see it, you may need to add it depending on what you are doing for your project.
-
-## Grab changes instructors make from forked repo
+## Grab changes from forked repo
 
 ```
 $ git pull remote upstream
@@ -95,24 +102,30 @@ $ git pull remote upstream
 $ git remote -v
 ```
 
-## Add stuff to local repo
+## Add "stuff" to local repo
+There are two steps to git. You add to staging and then you commit. Think of ordering food at an Italian restaraunt. The waiter walks up and you tell him what you want. "I want speghetti". The waiter writes it down. This of this part as the "add". Before he writes it down he is not aware of your order. After he does he is but you can change your mind.
 
 ```
 $ git add -A
 ```
 
-## Commit stuff to local repo
+## Commit "stuff" to local repo
+* The second part of git is committing. You ordered your food and now the waiter walks back to the kitchen and hands the receipt to the chef. Think of this part as the commit. You also want to write a short message that describes what you did in that commit. You want to commit early and often
+* Also think of commits as snapshots of your project. Imagine a family has a family reunion every year. At the end of the family reunion they take a family photography. Each year the family changes a bit. Some new babies are born, some people get married and bring someone new to the family. Some people get divorced. Some people die. But each year is a snapshot of the family that year. Think of commits as family reunion snapshots for your project.
 
 ```
 $ git commit -m 'your commit message'
 ```
 
-## Using origin master and production master
-* This is how you can have a staging and production repos on same project folder
+## What is "origin"?
+* In Git, "origin" is a shorthand name for the remote repository that a project was originally cloned from
+* More precisely, it is used instead of that original repository's URL - and thereby makes referencing much easier
+* Note that origin is by no means a "magical" name, but just a standard convention
+Using origin master and production master
+* Here is an example of using another name besides origin
 
 ```
 $ git push -u production master
-$ git push -u origin master
 ```
 
 ## Push local changes to remote
@@ -128,43 +141,42 @@ $ git reset HEAD config.codekit
 ```
 
 ## Check current status
+* You want to see where you are with `git` and this is the purpose of `status`
+* You will use this a lot
 
 ```
 $ git status
 ```
 
 ## Create a branch
+* When you create a branch you want to name it specific to what is the purpose of the branch
+* Branches are often referred to as "feature branches"
+* Do not use spaces in your branch name
+* I like them to be lowercase and separate words with dashes
+
+`$ git branch my-branch`
+
+## Checkout a branch
+* You then need to checkout of current branch and move to new created branch with:
+
+`$ git checkout my-branch`
+
+## Create and Move inside that branch
+* This line does both actions in one fell swoop
+
+`$ git checkout -b my-branch`
+
+## Merge feature branch into master branch
+1. Add and commit changes in that feature branch
+2. Move back to master (`$ git checkout master`) 
+3. And merge changes into master
 
 ```
-$ git branch (name of branch) 
+$ git add -A
+$ git commit -m 'Added something important'
+$ git checkout master
+$ git merge my-branch
 ```
-
-You then need to checkout of current branch
-  and move to new created branch with:
-
-```
-  $ git checkout (name of branch)
-```
-
-Add + commit changes in that branch
-Move back to master ($ git checkout master) 
-And merge changes into master
-
-```
-$ git merge
-```
-
-## How do I remove `.next` from a git repo?
-* I accidentally added `.next` folder to git and since these are generated files, I want to remove them
-
-### Remove `.next`
-* Inside the React folder (`client` or whatever you called it) add a `.gitignore` file
-* Type `.next` as a line inside the file (**note**: it should also have `node_modules`)
-
-### Remove the tracking of `.next`
-* Then you need to remove the tracking of `.next` and you do that with this nifty command
-
-`$ git rm -r --cached .next`
 
 ## Git automation
 ### Bulk delete github repos
@@ -182,7 +194,8 @@ $ git merge
   - `$ git clean -n`
 
 * And this will make the branch like brand new
-  - `$ git clean -f` Makes the branch like brand new
+  - `$ git clean -f`
+    + Makes the branch like brand new
 
 ## How do I add `upstream` to git?
 * Specify a new remote `upstream` repository that will be synced with the fork
@@ -212,8 +225,7 @@ $ git merge
 ## How to clone a repo while inside the folder itself
 `$ git clone git@github:me/name.git .`
 
-## How to cloen the folder if the folder is not empty
-
+## How to clean the folder if the folder is not empty
 ```
 git init
 git remote add origin git@github.com:me/name.git
@@ -221,13 +233,12 @@ git pull origin master
 ```
 
 * Remove `.git` after you're done and any files you don't want like the `README`
-
 * [source for cloning without folder](http://stackoverflow.com/questions/6224626/github-clone-contents-of-a-repo-without-folder-itself)
 
 ## How to quickly generate a `.gitignore`
 * [gitignore.io](https://www.gitignore.io/)
 
-#### Git config
+## Git config
 [link](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 
 ##### Useful git config settings
@@ -253,19 +264,7 @@ core.precomposeunicode=true
 ```
 
 ## Deploy a site using Git
-
-[video tutorial](https://www.youtube.com/watch?v=9qIK8ZC9BnU)
-
-## Forks
-When you want to jump in to the world of open source development you are going to fork someone else's repo. This is in contrast to just simply cloning the repo.
-
-When you fork someone else's repo, you get and exact copy of the repo (think xerox copy machine) but it is added inside your repo. You can take this code and totally do whatever you want with it but if you want to contribute to the open source project you can make pull requests to the other person's repo that you forked. They can accept and add your changes or deny or deny and ask for improvements before adding.
-
-When changes happen to this forked repo by the creators of it, you can pull down the new modifications only if you add `upstream` capability to your report. This is the direct connection to communicate from them to you and you to them.
-
-[Here is the link to add that capability](https://help.github.com/articles/syncing-a-fork/)
-
-# Git
+* [video tutorial](https://www.youtube.com/watch?v=9qIK8ZC9BnU)
 
 ## Global config
 
@@ -274,11 +273,9 @@ $ git config --global user.name "John Doe"
 $ git config --global user.email johndoe@example.com
 ```
 
-## Problems
-
+## Troubleshooting Git
 ### Can't Push
-
-If you get this error
+* If you get this error
 
 ![ssh permissions error](https://i.imgur.com/TBXPtvt.png)
 
@@ -291,15 +288,15 @@ $ pbcopy < ~/.ssh/id_rsa.pub
 
 [link to article](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
-Add a new SSH key. Give it a name.
-Paste your copied key into the textarea.
-Save.
+1. Add a new SSH key
+2. Give it a name
+3. Paste your copied key into the textarea
+4. Save
 
-Try to push again and it should work now.
-
+* Try to push again and it should work now.
 
 ## Git Aliases
-These aliases should be in your `.zshrc`
+I added these Mac aliases in my `.zshrc` to make less typing
 
 `.zshrc`
 
